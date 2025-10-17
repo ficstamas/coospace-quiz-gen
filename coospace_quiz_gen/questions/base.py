@@ -4,8 +4,14 @@ from ..utils.text import dedent
 import json
 
 
-class Question(ABC):
-    def __init__(self, total_score, question_html, inner_id=None, item_id=None, xml_tag=None):
+class ComplexSubType:
+    def __init__(self, is_official_subtype=False):
+        self.is_official_subtype = is_official_subtype
+
+
+class Question(ComplexSubType, ABC):
+    def __init__(self, total_score, question_html, inner_id=None, item_id=None, xml_tag=None, is_official_subtype=False):
+        super().__init__(is_official_subtype)
         self.total_score = total_score
         self.question_html = question_html
         self.inner_id = inner_id

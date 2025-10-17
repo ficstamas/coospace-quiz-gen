@@ -1,6 +1,6 @@
 from .base import Question
-import json
 from ..utils.html import format_html_for_json_data
+import logging
 
 
 class SingleChoiceQuestion(Question):
@@ -11,7 +11,7 @@ class SingleChoiceQuestion(Question):
         :param total_score: Total score that can be obtained from the question
         :param random_order: Shuffle options randomly (default: True)
         """
-        super().__init__(total_score, question_html, inner_id=1, xml_tag="SingleChoice")
+        super().__init__(total_score, question_html, inner_id=1, xml_tag="SingleChoice", is_official_subtype=True)
         self._answer_id = 1
         self.answers = []
         self._valid_answer_id = 1
@@ -44,7 +44,7 @@ class MultiChoiceQuestion(Question):
         :param total_score: Total score that can be obtained from the question
         :param random_order: Shuffle options randomly (default: True)
         """
-        super().__init__(total_score, question_html, inner_id=2, xml_tag="MultiChoice")
+        super().__init__(total_score, question_html, inner_id=2, xml_tag="MultiChoice", is_official_subtype=True)
         self._answer_id = 1
         self.answers = []
         self._valid_answer_ids = set()
@@ -90,7 +90,7 @@ class ShortTextQuestion(Question):
         :param regexp: Whether the answer should match regexp or not (does not work at the moment)
         :param case_sensitive: Whether the answer should be case-sensitive
         """
-        super().__init__(total_score, question_html, inner_id=3, xml_tag="ShortText")
+        super().__init__(total_score, question_html, inner_id=3, xml_tag="ShortText", is_official_subtype=True)
         self.answers = []
         self.regexp = regexp
         self.case_sensitive = case_sensitive
@@ -119,7 +119,7 @@ class EssayQuestion(Question):
         :param regexp: Whether the answer should match regexp or not (does not work at the moment)
         :param case_sensitive: Whether the answer should be case-sensitive
         """
-        super().__init__(total_score, question_html, inner_id=None, xml_tag="Essay")
+        super().__init__(total_score, question_html, inner_id=4, xml_tag="Essay")
         self.answers = []
 
     def add_keyword(self, keyword):
@@ -146,7 +146,7 @@ class TrueFalseQuestion(Question):
         :param answer_type: 0: True/False; 1: Yes/No
         :param answer_id: 1: True; 2: False
         """
-        super().__init__(total_score, question_html, inner_id=7, xml_tag="TrueFalse")
+        super().__init__(total_score, question_html, inner_id=7, xml_tag="TrueFalse", is_official_subtype=True)
         self.answers = []
         self.answer_type = answer_type
         self.answer_id = answer_id
@@ -177,7 +177,7 @@ class NumberQuestion(Question):
         :param question_html: Question HTML
         :param total_score: Total score that can be obtained from the question
         """
-        super().__init__(total_score, question_html, inner_id=14, xml_tag="Number")
+        super().__init__(total_score, question_html, inner_id=14, xml_tag="Number", is_official_subtype=True)
         self.answers = []
         self._answer_id = 1
 
@@ -243,6 +243,8 @@ class ComplexQuestion(Question):
         """
         if question.inner_id is None:
             raise ValueError("We cannot assign this type of question to a complex question!")
+        elif question.inner_id is not None and not question.is_official_subtype:
+            logging.warning("This question is not a official subtype, but there's chance that it will still work!")
 
         self.questions.append(question)
 

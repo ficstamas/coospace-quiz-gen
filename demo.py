@@ -48,6 +48,21 @@ q8.add_option_percent("Answer 1", 10, 1)
 q8.add_option_interval("Answer interval 1", 10, 100)
 q8.add_option_percent("Answer 2", 10, 1)
 
+# Complex type
+q9 = ComplexQuestion("Random Complex quiz", total_score=2.0)
+q10 = NumberQuestion("Random Question text8", total_score=2.0)
+# we can add several options at once
+# add_option_percent: adds a question with an expected value within the provided percen [value +/(percent)]
+# add_option_interval: adds a question with an expected value within range [from, to]
+q10.add_option_percent("Answer", 10, 1)
+q11 = ShortTextQuestion("Random Question text3", total_score=2.0)
+# adding accepted answers
+q11.add_answer("1")
+q11.add_answer("2")
+q9.add_question(q10)
+q9.add_question(q11)
+q12 = EssayQuestion("Enter code here", total_score=0.0)
+q9.add_question(q12)
 
 # Random question block
 block = RandomBlock("Random Question text", n_selected_question=2)
@@ -68,6 +83,7 @@ test.add_question(q7)
 test.add_question(q8)
 # and random blocks
 test.add_block(block)
+test.add_question(q9)
 
 # and finally save it at the specified location with the filename "quiz.cgtt"
 # we can provide a filename too but the ".cgtt" extension is necessary
