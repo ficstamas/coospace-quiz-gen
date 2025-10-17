@@ -24,8 +24,9 @@ Every question accepts `question_html` and `total_score`.
 | `ShortTextQuestion`    | Accepts a short textual answer                              | `case_sensitive` - case sensitive answer                                             | `add_answer(answer)`                                                                                               |
 | `EssayQuestion`        | Essay                                                       | ...                                                                                  | `add_keyword(keyword)`                                                                                             |
 | `TrueFalseQuestion`    | A class for True/False or Yes/No questions                  | `answer_type` - True/False(0), Yes/No(1) <br> `answer_id` - True/Yes(1), False/No(2) | `set_answer_type_true_false()`, `set_answer_type_yes_no()`, `set_answer_true_or_yes()`, `set_answer_false_or_no()` |
-| `NumberQuestion`       | A question type for numerical imputs                        | ...                                                                                  | `add_option_percent(option_html, value, percent)`, `add_option_interval(option_html, from_, to_)`                  |
+| `NumberQuestion`       | A question type for numerical inputs                        | ...                                                                                  | `add_option_percent(option_html, value, percent)`, `add_option_interval(option_html, from_, to_)`                  |
 | `ComplexQuestion`      | A question type that can encapsulate multiple sub-questions | ...                                                                                  | `add_question(question)`                                                                                           |
+
 For example:
 ```python
 from coospace_quiz_gen import *
