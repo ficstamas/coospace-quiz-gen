@@ -44,14 +44,12 @@ class Test:
         id_ = 100000001  # this is the usual starting id, dont know if it matters
         for item in self.body:
             if isinstance(item, Question):
-                if item.item_id is None:
-                    item.item_id = id_
-                    id_ += 1
+                item.item_id = id_
+                id_ += 1
             elif isinstance(item, RandomBlock):
                 for sub_item in item.questions:
-                    if sub_item.item_id is None:
-                        sub_item.item_id = id_
-                        id_ += 1
+                    sub_item.item_id = id_
+                    id_ += 1
 
     def save(self, path: str, filename = "quiz.cgtt"):
         self.assign_ids()
