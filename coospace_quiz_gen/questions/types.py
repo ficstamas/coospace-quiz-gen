@@ -244,7 +244,8 @@ class ComplexQuestion(Question):
         if question.inner_id is None:
             raise ValueError("We cannot assign this type of question to a complex question!")
         elif question.inner_id is not None and not question.is_official_subtype:
-            logging.warning("This question is not a official subtype, but there's chance that it will still work!")
+            # logging.warning("This question is not a official subtype, but there's chance that it will still work!")
+            pass
 
         self.questions.append(question)
 
